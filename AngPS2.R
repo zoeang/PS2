@@ -1,6 +1,5 @@
 ###Benford's Law; calculating violations
-# how do I make r take the significant number?
-#xi<-proportion instances/total instances
+
 
 #Create some toy data to test the loop
 a<-c(548,265489,16514,651,864,31,54,231,648,23)
@@ -100,7 +99,7 @@ digitdistribution<-table(xi)
 Parti(c(1:100), FALSE, TRUE)
 ##################################################################
 
-#####
+#####Question 2
 if(leemis()>=1.212){
   print("Significant when $\alpha=0.01")
   if
