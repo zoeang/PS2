@@ -2,7 +2,8 @@
 
 
 #Create some toy data to test the loop
-a<-c(548,265489,16514,651,864,31,54,231,648,23)
+#a<-c(548,265489,16514,651,864,31,54,231,648,23)
+a<-c(10:13)
 b<-NULL
 xi<-NULL
 
@@ -100,7 +101,38 @@ Parti(c(1:100), FALSE, TRUE)
 ##################################################################
 
 #####Question 2
-if(leemis()>=1.212){
-  print("Significant when $\alpha=0.01")
-  if
-}
+#print.benfords<-function(a,m,d)
+L<-Parti(c(1:100), TRUE, TRUE)[[1]] #Replace with arguments
+D<-Parti(c(1:100), T, TRUE)[[2]] #Replace with arguments
+
+L1=NULL
+LM<-(if(L>=.851 & L<.967){
+  L1<-paste(round(L,3),"*", sep="")
+} else if (L>=.967 & L<1.212){
+  L1<-paste(round(L,3),"**", sep="")
+} else if (L>=1.212){
+  L1<-paste(round(L,3),"***", sep="")
+} else {
+    print(round(L,3))
+  })
+
+D1=NULL
+CGD<-(if(D>=1.212 & D<1.330){
+  D1<-paste(round(D,3),"*", sep="")
+} else if (D>=1.330 & L<1.569){
+  D1<-paste(round(L,3),"**", sep="")
+} else if (D>=1.569){
+  D1<-paste(round(D,3),"***", sep="")
+} else {
+  print(round(D,3))
+})
+
+Stattable<-matrix(c(LM,CGD),byrow = T)
+row.names(Stattable)<-c("Leemis' m", "Cho-Gains' d")
+colnames(Stattable)<-c("Result")
+
+Stattable
+#######
+#How do i make a legend?
+astriks<-"*=p(.10) **=p(.05) ***=p(.01)"
+
