@@ -115,7 +115,8 @@ if(m==T){  #Test for significance if m is T
       } else if (L>=1.212){
         L1<-paste(round(L,3),"***", sep="")
       } else {
-          return(round(L,3)) #this is printing L
+        #L1<-paste(round(L,3)," cannot reject the null", sep="")
+          paste(round(L,3)) #this is printing L
         })
 } else if(m==F){
     LM<-NA  #put NA in matrix is m==F
@@ -130,7 +131,7 @@ if(d==T){
       } else if (D>=1.569){
         D1<-paste(round(D,3),"***", sep="")
       } else {
-        return(round(D,3)) #This is printing D
+        paste(round(D,3)) #This is printing D
       })
 }else if(d==F){
     CGD<- NA
@@ -144,23 +145,16 @@ print(Stattable)
 cat(Significance) #append the legend to the matrix
 }
 
-print.benfords(c(1:100), T,T)
+print.benfords(c(1:100), T,F)
 
-##################
-
-
-
-###########
+# Write a CSV
 exportfun <- function(a,m,d){
   sink(file="Benfords.csv")
   print.benfords(a,m,d)
   sink()
-}###THis will not work because the arguments cannot be specified
+}
 
-exportfun
+exportfun(a,T,T)
 
-sink()
-print.benfords(c(1:50), T,T)
-getwd()
 
 
