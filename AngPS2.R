@@ -103,40 +103,53 @@ Parti(c(1:100), FALSE, TRUE)
 
 #####Question 2
 print.benfords<-function(a,m,d){
-L<-Parti(a, m, d)[[1]] 
-D<-Parti(a, m, d)[[2]] 
+L<-Parti(a,m,d)[[1]] #calculate m
+D<-Parti(a,m,d)[[2]]  #calculate d
 
-L1=NULL
-LM<-(if(L>=.851 & L<.967){
-  L1<-paste(round(L,3),"*", sep="")
-} else if (L>=.967 & L<1.212){
-  L1<-paste(round(L,3),"**", sep="")
-} else if (L>=1.212){
-  L1<-paste(round(L,3),"***", sep="")
-} else {
-    print(round(L,3)) #this is printing L
-  })
-
-D1=NULL
-CGD<-(if(D>=1.212 & D<1.330){
-  D1<-paste(round(D,3),"*", sep="")
-} else if (D>=1.330 & L<1.569){
-  D1<-paste(round(L,3),"**", sep="")
-} else if (D>=1.569){
-  D1<-paste(round(D,3),"***", sep="")
-} else {
-  print(round(D,3)) #This is printing D
-})
-
-Stattable<-matrix(c(LM,CGD),byrow = T)
-row.names(Stattable)<-c("Leemis' m", "Cho-Gains' d")
-colnames(Stattable)<-c("Result")
-Significance<-"* p<.10; ** p<.05; *** p<.01"
-print(Stattable)
-cat(Significance)
-
+if(m==T){  #Test for significance if m is T
+  L1=NULL
+  LM<-(if(L>=.851 & L<.967){
+        L1<-paste(round(L,3),"*", sep="")
+      } else if (L>=.967 & L<1.212){
+        L1<-paste(round(L,3),"**", sep="")
+      } else if (L>=1.212){
+        L1<-paste(round(L,3),"***", sep="")
+      } else {
+          return(round(L,3)) #this is printing L
+        })
+} else if(m==F){
+    LM<-NA  #put NA in matrix is m==F
 }
+
+if(d==T){
+      D1=NULL
+      CGD<-(if(D>=1.212 & D<1.330){
+        D1<-paste(round(D,3),"*", sep="")
+      } else if (D>=1.330 & L<1.569){
+        D1<-paste(round(L,3),"**", sep="")
+      } else if (D>=1.569){
+        D1<-paste(round(D,3),"***", sep="")
+      } else {
+        return(round(D,3)) #This is printing D
+      })
+}else if(d==F){
+    CGD<- NA
+}
+
+Stattable<-matrix(c(LM,CGD),byrow = T) #create a mtrix with the desired output
+row.names(Stattable)<-c("Leemis' m", "Cho-Gains' d")
+colnames(Stattable)<-c("Result") #label the matrix
+Significance<-"* p<.10; ** p<.05; *** p<.01" #create a legend
+print(Stattable)
+cat(Significance) #append the legend to the matrix
+}
+
 print.benfords(c(1:100), T,T)
+
+##################
+
+
+
 ###########
 exportfun <- function(a,m,d){
   sink(file="Benfords.csv")
@@ -150,4 +163,4 @@ sink()
 print.benfords(c(1:50), T,T)
 getwd()
 
-rbind(Stattable, Significance)
+
