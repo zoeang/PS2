@@ -102,7 +102,7 @@ Parti(c(1:100), FALSE, TRUE)
 ##################################################################
 
 #####Question 2
-#print.benfords<-function(a,m,d)
+print.benfords<-function(a,m,d){
 L<-Parti(c(1:100), TRUE, TRUE)[[1]] #Replace with arguments
 D<-Parti(c(1:100), T, TRUE)[[2]] #Replace with arguments
 
@@ -137,5 +137,6 @@ Stattable
 #How do i make a legend?
 Significance<-"*=p(.10) **=p(.05) ***=p(.01)"
 
-
 rbind(Stattable, Significance)
+}
+print.benfords(c(1:50), T,T)
