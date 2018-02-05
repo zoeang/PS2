@@ -103,8 +103,8 @@ Parti(c(1:100), FALSE, TRUE)
 
 #####Question 2
 print.benfords<-function(a,m,d){
-L<-Parti(c(1:100), TRUE, TRUE)[[1]] #Replace with arguments
-D<-Parti(c(1:100), T, TRUE)[[2]] #Replace with arguments
+L<-Parti(a, m, d)[[1]] 
+D<-Parti(a, m, d)[[2]] 
 
 L1=NULL
 LM<-(if(L>=.851 & L<.967){
@@ -114,7 +114,7 @@ LM<-(if(L>=.851 & L<.967){
 } else if (L>=1.212){
   L1<-paste(round(L,3),"***", sep="")
 } else {
-    print(round(L,3))
+    print(round(L,3)) #this is printing L
   })
 
 D1=NULL
@@ -125,18 +125,29 @@ CGD<-(if(D>=1.212 & D<1.330){
 } else if (D>=1.569){
   D1<-paste(round(D,3),"***", sep="")
 } else {
-  print(round(D,3))
+  print(round(D,3)) #This is printing D
 })
 
 Stattable<-matrix(c(LM,CGD),byrow = T)
 row.names(Stattable)<-c("Leemis' m", "Cho-Gains' d")
 colnames(Stattable)<-c("Result")
+Significance<-"* p<.10; ** p<.05; *** p<.01"
+print(Stattable)
+cat(Significance)
 
-Stattable
-#######
-#How do i make a legend?
-Significance<-"*=p(.10) **=p(.05) ***=p(.01)"
+}
+print.benfords(c(1:100), T,T)
+###########
+exportfun <- function(a,m,d){
+  sink(file="Benfords.csv")
+  print.benfords(a,m,d)
+  sink()
+}###THis will not work because the arguments cannot be specified
+
+exportfun
+
+sink()
+print.benfords(c(1:50), T,T)
+getwd()
 
 rbind(Stattable, Significance)
-}
-print.benfords(c(1:50), T,T)
