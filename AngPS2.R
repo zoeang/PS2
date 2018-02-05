@@ -65,6 +65,7 @@ Parti<-function(a,m,d){
     proportions<-c(proportions,y)
   }
   xi<-proportions
+  xi
 #Leemis
   if(m==T){
       argument<-NULL
@@ -90,10 +91,10 @@ Parti<-function(a,m,d){
     output2<-NA
   }
 #distribution
-digitdistribution<-table(xi)
+digitdistribution<-table(as.numeric(substr(a, start=1, stop=1)))
 #Final Output
   output <- list(output1, output2, digitdistribution)
-  names(output)<-c("Leemis' m", "Cho-Gains' d", "Digit Distribution")
+  names(output)<-c("Leemis' m", "Cho-Gains' d", "Significant Digit Distribution")
   return(output)
 }
 
@@ -134,5 +135,7 @@ colnames(Stattable)<-c("Result")
 Stattable
 #######
 #How do i make a legend?
-astriks<-"*=p(.10) **=p(.05) ***=p(.01)"
+Significance<-"*=p(.10) **=p(.05) ***=p(.01)"
 
+
+rbind(Stattable, Significance)
